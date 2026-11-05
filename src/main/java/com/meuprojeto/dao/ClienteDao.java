@@ -1,10 +1,10 @@
 package com.meuprojeto.dao;
 
-import com.meuprojeto.dominio.Cliente;
-import com.meuprojeto.interfaces.Crud;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.meuprojeto.dominio.Cliente;
+import com.meuprojeto.interfaces.Crud;
 
 public class ClienteDao implements Crud<Cliente> {
 
@@ -13,17 +13,18 @@ public class ClienteDao implements Crud<Cliente> {
 
     @Override
     public void salvar(Cliente objeto) {
+        listaCliente.add(objeto);
 
     }
 
     @Override
     public List<Cliente> listar() {
-        return List.of();
+        return listaCliente;
     }
 
     @Override
     public Cliente buscar(int indice) {
-        return null;
+        return listaCliente.get(indice);
     }
 
     @Override

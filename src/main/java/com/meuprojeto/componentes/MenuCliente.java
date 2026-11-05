@@ -1,6 +1,11 @@
 package com.meuprojeto.componentes;
 
+import java.time.LocalDate;
 import java.util.Scanner;
+
+import com.meuprojeto.dao.ClienteDao;
+import com.meuprojeto.dominio.Cliente;
+import com.meuprojeto.dominio.Endereco;
 
 public final class MenuCliente {
 
@@ -9,7 +14,7 @@ public final class MenuCliente {
 
     public static void exibir(Scanner scanner) {
         int opcao;
-
+        ClienteDao dao = new ClienteDao();
         do {
             System.out.println("\n===== MENU CLIENTE =====");
             System.out.println("1 - Cadastrar cliente");
@@ -22,13 +27,64 @@ public final class MenuCliente {
             opcao = MenuGeral.lerOpcao(scanner);
 
             switch (opcao) {
-                case 1 -> System.out.println("Cadastrar cliente");
-                case 2 -> System.out.println("Listar clientes");
-                case 3 -> System.out.println("Buscar cliente");
-                case 4 -> System.out.println("Atualizar cliente");
-                case 5 -> System.out.println("Deletar cliente");
-                case 0 -> System.out.println("Voltando ao menu geral...");
-                default -> System.out.println("Opção inválida!");
+                case 1:
+                    Cliente cliente = new Cliente();
+                    System.out.println("Informe seu nome:");
+                    cliente.setNome(scanner.nextLine());
+
+                    System.out.println("Informe sua data de nascimento (ano-mes-dia):");
+                    String dataNascimento = scanner.nextLine();
+                    cliente.setDataNascimento(LocalDate.parse(dataNascimento));
+
+                    System.out.println("Digite seu e-mail: ");
+                    String email = scanner.nextLine();
+                    cliente.setEmail(email);
+
+                    System.out.println("Digite seu numero de telefone: ");
+                    String numero = scanner.nextLine();
+                    cliente.setTelefone(numero);
+
+                    System.out.println("Digite seu genero: ");
+                    String genero = scanner.nextLine();
+                    cliente.setGenero(genero);
+
+                    System.out.println("Digite seu CPF: ");
+                    String cpf = scanner.nextLine();
+                    cliente.setCpf(cpf);
+                    
+                    System.out.println("Digite sua Rua: ");
+                    String rua = scanner.nextLine();
+                    System.out.println("Digite seu numero: ");
+                    int num = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Digite sua cidade: ");
+                    String cidade = scanner.nextLine();
+                    Endereco endereco = new Endereco(rua,num,cidade);
+                    cliente.setEndereco(endereco);                
+                    System.out.println("Salvando no banco de dados...\n");
+                    dao.salvar(cliente);
+                    if(dao.listar() == null){
+                        System.out.println("ERRO ao salvar!\n");
+                    }else{
+                        System.out.println("Salvo Com sucesso!\n");
+                    }
+                    break;
+                    case 2:
+                        
+                        dao.listar();
+                        System.out.println(dao.listar());
+                    break;
+                case 3:
+                    System.out.println("Digite o indice do cliente:");
+                    int indice = scanner.nextInt();
+                    dao.buscar(indice);
+                    break;
+
+                // case 4 -> System.out.println("Atualizar cliente");
+                // case 5 -> System.out.println("Deletar cliente");
+                // case 0 -> System.out.println("Voltando ao menu geral...");
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
             }
         } while (opcao != 0);
     }
