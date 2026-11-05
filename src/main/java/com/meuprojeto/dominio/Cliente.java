@@ -82,5 +82,10 @@ public class Cliente extends Base {
         this.endereco = endereco;
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{nome='" + nome + "', dataNascimento=" + dataNascimento + ", email='" + email + "', telefone='" + telefone + "', genero='" + genero + "', cpf='" + cpf + "', endereco=" + endereco + "}";
+    }
+
 
 }

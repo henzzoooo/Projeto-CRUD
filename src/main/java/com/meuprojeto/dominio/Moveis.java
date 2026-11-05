@@ -42,4 +42,9 @@ public class Moveis extends Produto {
     public void setQtdItens(int qtdItens) {
         this.qtdItens = qtdItens;
     }
+
+    @Override
+    public String toString() {
+        return "Moveis{" + super.toString() + ", composicao='" + composicao + "', materiais='" + materiais + "', qtdItens=" + qtdItens + "}";
+    }
 }

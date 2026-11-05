@@ -41,4 +41,9 @@ public class Eletrodomestrico extends Produto {
     public void setEspecificacoes(String especificacoes) {
         this.especificacoes = especificacoes;
     }
+
+    @Override
+    public String toString() {
+        return "Eletrodomestrico{" + super.toString() + ", voltagem=" + voltagem + ", potencial=" + potencial + ", especificacoes='" + especificacoes + "'}";
+    }
 }

@@ -24,16 +24,23 @@ public class ClienteDao implements Crud<Cliente> {
 
     @Override
     public Cliente buscar(int indice) {
-        return listaCliente.get(indice);
+        if (indice >= 0 && indice < listaCliente.size()) {
+            return listaCliente.get(indice);
+        }
+        return null;
     }
 
     @Override
     public void atualizar(int indice, Cliente objeto) {
-
+        if (indice >= 0 && indice < listaCliente.size()) {
+            listaCliente.set(indice, objeto);
+        }
     }
 
     @Override
     public void deletar(int indice) {
-
+        if (indice >= 0 && indice < listaCliente.size()) {
+            listaCliente.remove(indice);
+        }
     }
 }

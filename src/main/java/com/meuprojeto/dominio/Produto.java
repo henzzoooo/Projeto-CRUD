@@ -80,4 +80,9 @@ public abstract class Produto {
     public void setCriadoPor(String criadoPor) {
         this.criadoPor = criadoPor;
     }
+
+    @Override
+    public String toString() {
+        return "Produto{marca='" + marca + "', nome='" + nome + "', modelo='" + modelo + "', quantidade=" + quantidade + ", descricacao='" + descricacao + "', dataCriacao=" + dataCriacao + ", criadoPor='" + criadoPor + "'}";
+    }
 }

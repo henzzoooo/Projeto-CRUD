@@ -9,12 +9,13 @@ import com.meuprojeto.dominio.Endereco;
 
 public final class MenuCliente {
 
+    private static final ClienteDao dao = new ClienteDao();
+
     private MenuCliente() {
     }
 
     public static void exibir(Scanner scanner) {
         int opcao;
-        ClienteDao dao = new ClienteDao();
         do {
             System.out.println("\n===== MENU CLIENTE =====");
             System.out.println("1 - Cadastrar cliente");
@@ -75,13 +76,52 @@ public final class MenuCliente {
                     break;
                 case 3:
                     System.out.println("Digite o indice do cliente:");
-                    int indice = scanner.nextInt();
-                    dao.buscar(indice);
+                    int indice = MenuGeral.lerOpcao(scanner);
+                    Cliente clienteBuscado = dao.buscar(indice);
+                    System.out.println(clienteBuscado);
                     break;
-
-                // case 4 -> System.out.println("Atualizar cliente");
-                // case 5 -> System.out.println("Deletar cliente");
-                // case 0 -> System.out.println("Voltando ao menu geral...");
+                case 4:
+                    System.out.println("Atualizar cliente");
+                    System.out.println("Digite o indice do cliente:");
+                    int indiceAtualizar = MenuGeral.lerOpcao(scanner);
+                    Cliente clienteExistente = dao.buscar(indiceAtualizar);
+                    if (clienteExistente != null) {
+                        Cliente clienteAtualizado = new Cliente();
+                        System.out.println("Informe seu nome:");
+                        clienteAtualizado.setNome(scanner.nextLine());
+                        System.out.println("Informe sua data de nascimento (ano-mes-dia):");
+                        String novaData = scanner.nextLine();
+                        clienteAtualizado.setDataNascimento(LocalDate.parse(novaData));
+                        System.out.println("Digite seu e-mail: ");
+                        clienteAtualizado.setEmail(scanner.nextLine());
+                        System.out.println("Digite seu numero de telefone: ");
+                        clienteAtualizado.setTelefone(scanner.nextLine());
+                        System.out.println("Digite seu genero: ");
+                        clienteAtualizado.setGenero(scanner.nextLine());
+                        System.out.println("Digite seu CPF: ");
+                        clienteAtualizado.setCpf(scanner.nextLine());
+                        System.out.println("Digite sua Rua: ");
+                        String novaRua = scanner.nextLine();
+                        System.out.println("Digite seu numero: ");
+                        int novoNum = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Digite sua cidade: ");
+                        String novaCidade = scanner.nextLine();
+                        clienteAtualizado.setEndereco(new Endereco(novaRua, novoNum, novaCidade));
+                        dao.atualizar(indiceAtualizar, clienteAtualizado);
+                        System.out.println("Salvo Com sucesso!\n");
+                    } else {
+                        System.out.println("ERRO ao salvar!\n");
+                    }
+                    break;
+                case 5:
+                    System.out.println("Deletar cliente");
+                    System.out.println("Digite o indice do cliente:");
+                    int indiceDeletar = MenuGeral.lerOpcao(scanner);
+                    dao.deletar(indiceDeletar);
+                    break;
+                case 0:
+                    System.out.println("Voltando ao menu geral...");
+                    break;
                 default:
                     System.out.println("Opção inválida!");
                     break;

@@ -22,16 +22,23 @@ public class ProdutoDao implements Crud<Produto> {
 
     @Override
     public Produto buscar(int indice) {
-        return listaProdutos.get(indice);
+        if (indice >= 0 && indice < listaProdutos.size()) {
+            return listaProdutos.get(indice);
+        }
+        return null;
     }
 
     @Override
     public void atualizar(int indice, Produto objeto) {
-        listaProdutos.set(indice, objeto);
+        if (indice >= 0 && indice < listaProdutos.size()) {
+            listaProdutos.set(indice, objeto);
+        }
     }
 
     @Override
     public void deletar(int indice) {
-        listaProdutos.remove(indice);
+        if (indice >= 0 && indice < listaProdutos.size()) {
+            listaProdutos.remove(indice);
+        }
     }
 }
