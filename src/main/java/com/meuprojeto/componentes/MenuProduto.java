@@ -10,13 +10,12 @@ import com.meuprojeto.dominio.Produto;
 
 public final class MenuProduto {
 
-    private static final ProdutoDao dao = new ProdutoDao();
-
     private MenuProduto() {
     }
 
     public static void exibir(Scanner scanner) {
         int opcao;
+        ProdutoDao dao = new ProdutoDao();
 
         do {
             System.out.println("\n===== MENU PRODUTO =====");

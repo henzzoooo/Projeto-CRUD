@@ -9,13 +9,12 @@ import com.meuprojeto.dominio.Endereco;
 
 public final class MenuCliente {
 
-    private static final ClienteDao dao = new ClienteDao();
-
     private MenuCliente() {
     }
 
     public static void exibir(Scanner scanner) {
         int opcao;
+        ClienteDao dao = new ClienteDao();
         do {
             System.out.println("\n===== MENU CLIENTE =====");
             System.out.println("1 - Cadastrar cliente");
